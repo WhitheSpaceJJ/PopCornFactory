@@ -1,13 +1,16 @@
 package mx.edu.itson.popcornfactory
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 
 class detalle_pelicula : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detalle_pelicula)
 
@@ -20,8 +23,19 @@ class detalle_pelicula : AppCompatActivity() {
           iv_pelicula_image.setImageResource(bundle.getInt("header"))
           tv_nombre_pelicula.setText(bundle.getString("titulo"))
           tv_pelicula_desc.setText(bundle.getString("sinopsis"))
+
       }
 
+        var button2: Button =findViewById(R.id.buyTickets)
+
+        button2.setOnClickListener {
+            var intento=Intent(this, SeatSelection::class.java)
+            var id= bundle?.getInt("pos")
+            val title = intent.getStringExtra("titulo")
+            intent.putExtra("movie",id)
+                intent.putExtra("name",title)
+            this.startActivity(intento)
+        }
 
     }
 }
